@@ -1,63 +1,121 @@
 import { contact } from '../data/contact';
-import { Reveal } from './Reveal';
+import { Button } from './ui/Button';
+import { Reveal } from './ui/Reveal';
+import { SectionHeading } from './ui/SectionHeading';
+import { ClockIcon, MapPinIcon, PhoneIcon } from './icons';
 
 export function Contact() {
   return (
-    <section id="contato" className="bg-white py-20 sm:py-28">
-      <div className="container-app grid gap-10 lg:grid-cols-2 lg:gap-16">
-        <Reveal>
-          <span className="text-xs font-bold uppercase tracking-widest text-tomato">Contato</span>
-          <h2 className="mt-3 font-display text-3xl font-semibold text-olive-dark sm:text-4xl">
-            Peça já a sua pizza
-          </h2>
-          <p className="mt-3 max-w-md text-olive-dark/70">
-            Estamos prontos para preparar a sua pizza personalizada. Chame no WhatsApp ou venha nos visitar.
-          </p>
+    <section id="contato" className="bg-cream-200 py-24 sm:py-32">
+      <div className="container-app">
+        <SectionHeading
+          eyebrow="Contato"
+          title="Peça já a sua pizza"
+          highlight={['já']}
+          description="Chame no WhatsApp para montar o seu pedido ou venha nos visitar — a casa é sua."
+        />
 
-          <dl className="mt-8 space-y-6">
-            <div>
-              <dt className="text-xs font-bold uppercase tracking-widest text-olive-dark/50">Endereço</dt>
-              <dd className="mt-1 text-olive-dark">{contact.address}</dd>
-            </div>
-            <div>
-              <dt className="text-xs font-bold uppercase tracking-widest text-olive-dark/50">Horário</dt>
-              <dd className="mt-1 space-y-0.5 text-olive-dark">
-                {contact.hours.map((entry) => (
-                  <p key={entry.days}>
-                    {entry.days}: <span className="text-olive-dark/70">{entry.time}</span>
-                  </p>
-                ))}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-xs font-bold uppercase tracking-widest text-olive-dark/50">WhatsApp</dt>
-              <dd className="mt-1">
-                <a href={contact.whatsappHref} className="font-semibold text-tomato hover:underline">
-                  {contact.whatsapp}
-                </a>
-              </dd>
-            </div>
-          </dl>
+        <div className="mt-16 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+          {/* Cartão escuro com os dados */}
+          <Reveal variant="left">
+            <div className="flex h-full flex-col rounded-[1.75rem] bg-forest-800 p-9 text-cream sm:p-11">
+              <dl className="space-y-8">
+                <div className="flex gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-light">
+                    <MapPinIcon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <dt className="text-[10px] font-bold uppercase tracking-ultra-wide text-cream/50">
+                      Endereço
+                    </dt>
+                    <dd className="mt-1.5 leading-relaxed">{contact.address}</dd>
+                  </div>
+                </div>
 
-          <a
-            href={contact.whatsappHref}
-            className="mt-8 inline-flex rounded-full bg-tomato px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-cream shadow-card transition-transform hover:-translate-y-0.5 hover:bg-tomato-dark"
-          >
-            Chamar no WhatsApp
-          </a>
-        </Reveal>
+                <div className="flex gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-light">
+                    <ClockIcon className="h-5 w-5" />
+                  </span>
+                  <div className="flex-1">
+                    <dt className="text-[10px] font-bold uppercase tracking-ultra-wide text-cream/50">
+                      Horário
+                    </dt>
+                    <dd className="mt-2 space-y-1.5">
+                      {contact.hours.map((entry) => (
+                        <p key={entry.days} className="flex justify-between gap-4 text-sm">
+                          <span className="text-cream/80">{entry.days}</span>
+                          <span className="text-cream/55">{entry.time}</span>
+                        </p>
+                      ))}
+                    </dd>
+                  </div>
+                </div>
 
-        <Reveal delay={100}>
-          <div
-            role="img"
-            aria-label="Mapa de localização da Sabore Mio (em breve)"
-            className="flex h-full min-h-[320px] w-full items-center justify-center rounded-2xl border-2 border-dashed border-olive/20 bg-olive/5 text-center"
-          >
-            <p className="px-6 text-sm font-semibold uppercase tracking-wide text-olive-dark/50">
-              Mapa em breve
-            </p>
-          </div>
-        </Reveal>
+                <div className="flex gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-light">
+                    <PhoneIcon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <dt className="text-[10px] font-bold uppercase tracking-ultra-wide text-cream/50">
+                      Pedidos
+                    </dt>
+                    <dd className="mt-1.5 space-y-1">
+                      <a
+                        href={contact.whatsappHref}
+                        className="block font-semibold text-gold-light transition-colors hover:text-gold"
+                      >
+                        {contact.whatsapp}
+                      </a>
+                      <p className="text-sm text-cream/60">{contact.phone}</p>
+                    </dd>
+                  </div>
+                </div>
+              </dl>
+
+              <div className="mt-10">
+                <Button href={contact.whatsappHref} variant="gold" className="w-full sm:w-auto">
+                  Chamar no WhatsApp
+                </Button>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Mapa — placeholder até entrar o embed real */}
+          <Reveal variant="right" delay={140}>
+            <div
+              role="img"
+              aria-label="Mapa de localização da Sabore Mio — disponível em breve"
+              className="relative flex h-full min-h-[22rem] items-center justify-center overflow-hidden rounded-[1.75rem] border border-forest/15 bg-cream"
+            >
+              {/* Malha decorativa de ruas */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-[0.07]"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(#2E5233 1px, transparent 1px), linear-gradient(90deg, #2E5233 1px, transparent 1px)',
+                  backgroundSize: '44px 44px',
+                }}
+              />
+
+              <div className="relative text-center">
+                <span className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-wine text-cream">
+                  <MapPinIcon className="h-7 w-7" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 animate-ring-pulse rounded-full border-2 border-wine"
+                  />
+                </span>
+                <p className="mt-5 font-display text-lg font-semibold text-forest-800">
+                  Vila Itália, São Paulo
+                </p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-forest-700/45">
+                  Mapa interativo em breve
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

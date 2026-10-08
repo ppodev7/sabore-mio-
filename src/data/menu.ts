@@ -1,51 +1,67 @@
-import pizza1 from '../assets/pizza-1.jpg';
-import pizza2 from '../assets/pizza-2.jpg';
-import pizza3 from '../assets/pizza-3.jpg';
-import pizza4 from '../assets/pizza-4.jpg';
-import pizza6 from '../assets/pizza-6.jpg';
-import type { Pizza } from '../types/menu';
+import pizzaBrocolisBacon from '../assets/pizza2.jpeg';
+import pizzaPepperoni from '../assets/pizza1.jpeg';
+import type { FeaturedPizza, MenuFlavor } from '../types/menu';
 
-export const menu: Pizza[] = [
+/** Os dois carros-chefe, com foto de produto. */
+export const featuredPizzas: FeaturedPizza[] = [
+  {
+    id: 'pepperoni-artesanal',
+    name: 'Pepperoni Artesanal',
+    description:
+      'Pepperoni curado em fatias generosas sobre molho de tomate italiano e muçarela de búfala, finalizada com manjericão fresco e azeite extra-virgem.',
+    price: 62.9,
+    image: pizzaPepperoni,
+    ingredients: ['Pepperoni curado', 'Muçarela de búfala', 'Manjericão fresco'],
+    tag: 'Mais pedida',
+  },
   {
     id: 'brocolis-bacon',
-    name: 'Brócolis com Bacon Defumado',
+    name: 'Brócolis com Bacon',
     description:
-      'Brócolis levemente tostado no forno a lenha, bacon defumado artesanal e muçarela derretida sobre massa de fermentação natural.',
-    price: 54.9,
-    image: pizza1,
-    tags: ['Fermentação natural'],
-  },
-  {
-    id: 'brocolis-bacon-alho',
-    name: 'Brócolis, Bacon e Alho Assado',
-    description:
-      'A combinação clássica de brócolis e bacon ganha um toque a mais de alho assado lentamente, para um sabor mais profundo.',
-    price: 57.9,
-    image: pizza2,
-  },
-  {
-    id: 'pepperoni-manjericao',
-    name: 'Pepperoni, Manjericão e Parmesão',
-    description:
-      'Fatias generosas de pepperoni, manjericão fresco colhido na hora e lascas de parmesão sobre molho de tomate italiano.',
+      'Brócolis tostado na boca do forno, bacon defumado artesanal e creme de muçarela sobre massa de fermentação natural de 48 horas.',
     price: 59.9,
-    image: pizza3,
-    tags: ['Mais pedida'],
+    image: pizzaBrocolisBacon,
+    ingredients: ['Brócolis tostado', 'Bacon defumado', 'Creme de muçarela'],
+    tag: 'Favorita da casa',
+  },
+];
+
+/** Demais sabores — cardápio tipográfico, sem foto. */
+export const menuFlavors: MenuFlavor[] = [
+  {
+    id: 'margherita',
+    name: 'Margherita di Napoli',
+    ingredients: 'Molho de tomate San Marzano, muçarela de búfala, manjericão',
+    price: 48.9,
   },
   {
-    id: 'pepperoni-gran-reserva',
-    name: 'Pepperoni Gran Reserva',
-    description:
-      'Dupla camada de pepperoni artesanal, manjericão fresco e parmesão curado, finalizada com um fio de azeite extra-virgem.',
-    price: 62.9,
-    image: pizza4,
+    id: 'quatro-queijos',
+    name: 'Quatro Queijos',
+    ingredients: 'Muçarela, gorgonzola, parmesão curado e catupiry',
+    price: 56.9,
   },
   {
-    id: 'pepperoni-classica',
-    name: 'Pepperoni Clássica',
-    description:
-      'A receita tradicional: molho de tomate, muçarela generosa e pepperoni crocante nas bordas, direto do forno a lenha.',
+    id: 'calabresa',
+    name: 'Calabresa Artesanal',
+    ingredients: 'Calabresa defumada, cebola roxa caramelizada, orégano',
     price: 52.9,
-    image: pizza6,
+  },
+  {
+    id: 'parma-rucula',
+    name: 'Parma & Rúcula',
+    ingredients: 'Presunto de parma, rúcula selvagem, lascas de parmesão',
+    price: 68.9,
+  },
+  {
+    id: 'portuguesa',
+    name: 'Portuguesa da Casa',
+    ingredients: 'Presunto, ovo caipira, cebola, azeitona preta e ervilha',
+    price: 54.9,
+  },
+  {
+    id: 'funghi',
+    name: 'Funghi Trufado',
+    ingredients: 'Mix de cogumelos, creme de trufas negras, tomilho fresco',
+    price: 72.9,
   },
 ];

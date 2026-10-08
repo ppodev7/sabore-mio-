@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { FloatingActions } from './components/FloatingActions';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { Home } from './pages/Home';
@@ -16,6 +17,7 @@ function App() {
               <Home />
             </main>
             <Footer />
+            <FloatingActions />
           </>
         }
       />

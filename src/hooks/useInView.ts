@@ -1,6 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function useInView<T extends HTMLElement>(threshold = 0.2) {
+interface UseInViewOptions {
+  /** Fração do elemento visível para disparar (0–1). */
+  threshold?: number;
+  /** Margem do viewport, ex.: '0px 0px -12% 0px' antecipa o disparo. */
+  rootMargin?: string;
+  /** Desconecta após a primeira entrada — padrão para revelações. */
+  once?: boolean;
+}
+
+export function useInView<T extends HTMLElement>({
+  threshold = 0.15,
+  rootMargin = '0px 0px -10% 0px',
+  once = true,
+}: UseInViewOptions = {}) {
   const ref = useRef<T | null>(null);
   const [isInView, setIsInView] = useState(false);
 
@@ -8,19 +21,27 @@ export function useInView<T extends HTMLElement>(threshold = 0.2) {
     const node = ref.current;
     if (!node) return;
 
+    // Sem suporte a IntersectionObserver, mostra o conteúdo imediatamente.
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          observer.disconnect();
+          if (once) observer.disconnect();
+        } else if (!once) {
+          setIsInView(false);
         }
       },
-      { threshold },
+      { threshold, rootMargin },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [threshold, rootMargin, once]);
 
   return { ref, isInView };
 }
